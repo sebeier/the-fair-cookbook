@@ -1,7 +1,7 @@
 # The FAIR Cookbook :construction: 
 
 FAIR is for **F**indable, **A**ccessible, **I**nteroperable and **R**eusable. 
-
+ 
 This means: 
   - your data and services can be cited
   - the impact and visibility of your research will be increased
