@@ -43,9 +43,12 @@ ___
 
 ## Main Objectives
 
-The main purpose of this recipe is:
-
-> Provid a summary statement about the purpose of the recipe.
+The main objective of the recipe is to provide a means of submitting and tracking genotyping data in public repositories, with a particular focus on plants. This includes:
+1) Submission of sample data and metadata information to BioSamples.
+2) Submission of sequencing data and metadata to ENA.
+3) Retrieval of the correct genome assembly for the genotyping experiment
+4) Conversion of the resulting analysis file (in VCF format) to be FAIR
+5) Submission of the genotyping results to EVA.
 
 ___
 
@@ -99,24 +102,124 @@ Help to fill this table out can be found ...(not yet)...
 
 | Actions.Objectives.Tasks  | Input | Output  |
 | :------------- | :------------- | :------------- |
-| [validation](http://edamontology.org/operation_2428)  | [Structure Data File (SDF)](https://fairsharing.org/FAIRsharing.ew26v7)  | [report](http://edamontology.org/data_2048)  |
-| [calculation](http://edamontology.org/operation_3438)  | [Structure Data File (SDF)](https://fairsharing.org/FAIRsharing.ew26v7) | [InChi](https://fairsharing.org/FAIRsharing.ddk9t9) |
-| [calculation](http://edamontology.org/operation_3438)  | [Structure Data File (SDF)](https://fairsharing.org/FAIRsharing.ew26v7)  | [SMILES](https://fairsharing.org/FAIRsharing.qv4b3c)  |
-| [text annotation](http://edamontology.org/operation_3778)  | [Human Phenotype Ontology](https://fairsharing.org/FAIRsharing.kbtt7f)  | [annotated text](http://edamontology.org/data_3779)  |
+| [text annotation](http://edamontology.org/operation_3778)   | [MIAPPE](https://fairsharing.org/FAIRsharing.nd9ce9)  | [annotated text](http://edamontology.org/data_3779)  |
+| [conversion](http://edamontology.org/operation_3434)  | [Variant File Format (.vcf)](https://fairsharing.org/FAIRsharing.cfzz0h) | [annotated text](http://edamontology.org/data_3779) |
+| [format validation](http://edamontology.org/operation_0336) | [Variant File Format (.vcf)](https://fairsharing.org/FAIRsharing.cfzz0h)  | [report](http://edamontology.org/data_2048)  |
+| [format validation](http://edamontology.org/operation_0336)  | [MIAPPE](https://fairsharing.org/FAIRsharing.nd9ce9) | [report](http://edamontology.org/data_2048)  |
 
 
 ## Table of Data Standards
 
 | Data Formats  | Terminologies | Models  |
 | :------------- | :------------- | :------------- |
-| [FASTQ](https://fairsharing.org/FAIRsharing.r2ts5t)  | [LOINC](https://fairsharing.org/FAIRsharing.2mk2zb)  | [SRA XML](https://fairsharing.org/FAIRsharing.q72e3w)  |
-| [DICOM](https://fairsharing.org/FAIRsharing.b7z8by)  | [Human Phenotype Ontology](https://fairsharing.org/FAIRsharing.kbtt7f)  | [OMOP](https://fairsharing.org/FAIRsharing.qk984b)  |
+| [FASTQ](https://fairsharing.org/FAIRsharing.r2ts5t) | [LOINC](https://fairsharing.org/FAIRsharing.2mk2zb)  | [SRA XML](https://fairsharing.org/FAIRsharing.q72e3w)  |
+| [FASTA](https://fairsharing.org/FAIRsharing.rz4vfg) |  |  |
+| [MIAPPE](https://fairsharing.org/FAIRsharing.nd9ce9) |  |  |
+| [Variant File Format (.vcf)](https://fairsharing.org/FAIRsharing.cfzz0h) |  |  | 
+| [BioSamples - Plant MIAPPE checklist](https://www.ebi.ac.uk/biosamples/schemas/certification/plant-miappe.json) |  |  |
 
+## Table of Software and Tools
+
+| Tool Name |
+| :------------- |
+| [github](https://github.com/)  |
+| [BioSamples](https://www.ebi.ac.uk/biosamples/) |
+| [European Nucleotide Archive](https://www.ebi.ac.uk/ena/browser/home) |
+| [European Variation Archive](https://www.ebi.ac.uk/eva/) |
+| [VCF Validator](https://github.com/EBIvariation/vcf-validator/wiki/User's-Guide) |
 ___
 
 ## Main Content
 
-This is the place for your actual content. You can also ...
+In order to ensure interoperability of VCF files, the following VCF meta-information lines should be used:
+* Obligatory meta-information line :  
+  * **`##fileformat`** : Version of the VCF file format used.  
+  
+    Examples:
+    
+    File is in Version 4.3 of the VCF file format.
+    ```
+    ##fileformat=VCFv4.3  
+    ```
+    File is in Version 4.1 of the VCF file format.
+    ```
+    ##fileformat=VCFv4.1
+    ```
+* Recommended meta-information lines :  
+  * **`##bioinformatics_source (URL or URI)`**: Analytic approach usually consisting of chains of bioinformatics tools for creating the VCF file specified as the DOI of a publication, or more generally as URL/URI, like a public repository for the scripts used. 
+  *  
+    Examples:
+    
+    Description of a GBS experiment in barley and subsequent read alignment and variant calling using a bioinformatics analysis pipeline consisting of cutadapt, BWA-MEM, SAMtools, NovoSort, Picard, BCFtools and seqArray.
+    ```
+    ##bioinformatics_source=”doi.org/10.1038/s41588-018-0266-x” 
+    ```
+    Description of a GBS experiment in maize and subsequent read alignment and variant calling using a bioinformatics analysis pipeline consisting of cutadapt, CD-HIT-EST, Bowtie2, freebayes, TASSEL 5, VCFtools, BWA-MEM.
+    ```
+    ##bioinformatics_source=”doi.org/10.3389/fpls.2021.628439”
+    ```
+  * **`##reference_ac (assembly_accession)`**: Accession number, including the version, of the reference sequence on which the variation data of the present VCF is based.  
+    
+    Examples:
+    
+    Reference genome assembly for barley (*Hordeum vulgare*) cultivar Morex version 2.
+    ```
+    ##reference_ac=GCA_902498975.1  
+    ```
+    Reference genome assembly for maize (*Zea mays*) cultivar B73 version 3.
+    ```
+    ##reference_ac=GCA_000005005.5 
+    ```
+  * **`##reference_url (DOI)`**: A DOI (or URL/URI) for downloading of this reference genome, preferably from one INSDC archive.  
+    
+    Examples: 
+    
+    Reference genome assembly for barley (*Hordeum vulgare*) cultivar Morex version 2 download link on NCBI FTP.
+    ```
+    ##reference_url=”ftp.ncbi.nlm.nih.gov/genomes/all/GCA/902/498/975/GCA_902498975.1_Morex_v2.0/GCA_902498975.1_Morex_v2.0_genomic.fna.gz”  
+    ```
+    Reference genome assembly for maize (*Zea mays*) cultivar B73 version 3 download link on NCBI FTP.
+    ```
+    ##reference_url=”ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/005/005/GCA_000005005.5_B73_RefGen_v3/GCA_000005005.5_B73_RefGen_v3_genomic.fna.gz”
+    ```
+  * **`##contig (<ID=ctg1, length=sequence_length, assembly=gca_accession, md5=md5_hash, species=NCBI Taxon ID>)`** : The individual sequence(s) of the reference genome  
+    
+    Examples:
+    
+    Chromosome 1H of barley (*Hordeum vulgare*) cultivar Morex version 2.
+    ```
+    ##contig=<ID=chr1H,length=522466905,assembly=GCA_902498975.1,md5=8d21a35cc68340ecf40e2a8dec9428fa,species=NCBITaxon:4513>  
+    ```
+    Chromosome 1 of maize (*Zea mays*) cultivar B73 version 3.
+    ```
+    ##contig=<ID=GK000031.3,length=301433382,assembly=GCA_000005005.5,md5=74dfe85ad898416814fa98e8d7048f76,species=NCBITaxon:4577>
+    ```
+  * **`##SAMPLE(<ID=BioSample_accession, DOI=doi, ext_ID=registry:identifier>)`** : Describe the material whose variants are given in the genotype call columns in greater detail and can be extended using the specifications of the VCF format. In case no DOI is registered with the material the field ext_ID holds an external identifier (resolvable through identifiers.org (Wimalaratne et al., 2018) in the notation ‘registry:identifier’). If the database is not registered with identifiers.org, the DNS of the holding institution and the identifier scheme should be provided (see example below). For multiple external IDs the field should be used multiple times (delimited by commas).
+   
+    Examples:
+    
+    One genotype from the barley (*Hordeum vulgare*) GBS experiment.
+    ```
+    ##SAMPLE=<ID=SAMEA7836897,DOI="doi.org/10.25642/IPK/GBIS/17527",ext_ID="GBIS.IPK-GATERSLEBEN.DE/akzessionId:7811152">  
+    ```
+    One genotype from the maize (*Zea mays*) GBS experiment.
+    ```
+    ##SAMPLE=<ID=SAMEA9111398>
+    ```
+* Optional meta-information lines :  
+  * **`##fileDate`**: Creation date of the VCF in the basic form without separator: YYYYMMDD  
+    
+    Examples:
+    
+    File was created on October 28, 2021.
+    ```
+    ##fileDate=20211028  
+    ```
+    File was created on March 16, 2012.
+    ```
+    ##fileDate=20120316
+    ```
+  * In case of adding new fields : Please check the official format specifications to avoid redundancy and possible incompatibilities.
 
 ### ... write executable code
 
@@ -164,14 +267,20 @@ ___
 > * [A related recipe which nice complements the current one ](TODO)
 
 ___
+
+## Reference
+
+* [RDMkit - Tools Assembly - Plant Genomics](https://rdmkit.elixir-europe.org/plant_genomics_assembly.html)
+* [Training Material from FONDUE Datathon 2021](https://github.com/PBR/elixir-fondue-datathon)
+___
+
 ## Authors:
 
 | Name | Affiliation  | orcid | CrediT role  | specific contribution |
 | :------------- | :------------- | :------------- |:------------- |:------------- |
-| Philippe Rocca-Serra |  University of Oxford, Data Readiness Group| [0000-0001-9853-5668](https://orcid.org/orcid.org/0000-0001-9853-5668) | Writing - Original Draft | original format |
-| Susanna-Assunta Sansone |  University of Oxford, Data Readiness Group | | Writing - Review & Editing, Funding acquisition | | 
-| Alasdair Gray | Heriot-Watt Unviersity / ELIXIR-UK | [0000-0002-5711-4872](https://orcid.org/0000-0002-5711-4872) | Writing - Review & Editing | minor improvements (see git) |
-| Robert Giessmann | Bayer AG | [0000-0002-0254-1500](https://orcid.org/0000-0002-0254-1500) | Writing - Review & Editing | minor improvements (see git) |
+| Sebastian Beier |  Forschungszentrum Jülich, IPK Gatersleben, ELIXIR-DE| [0000-0002-2177-8781](https://orcid.org/0000-0002-2177-8781) | Writing - Original Draft | original format |
+| Uwe Scholz |  IPK Gatersleben, ELIXIR-DE | [0000-0001-6113-3518](https://orcid.org/0000-0001-6113-3518)| Writing - Review & Editing, Funding acquisition | | 
+
 ___
 
 
