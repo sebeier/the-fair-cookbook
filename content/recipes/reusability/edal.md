@@ -51,7 +51,7 @@ eDAL Submission Process
 
 |Tool Name|
 |--- |
-|[e!DAL-PGP Repository]((https://edal-pgp.ipk-gatersleben.de/))|
+|[e!DAL-PGP Repository](https://edal-pgp.ipk-gatersleben.de/)|
 |[ORCID](https://orcid.org/)|
 |[ROR (Research Organization Registry)](https://ror.org/)|
 |[e!DAL-PGP Knowledge Base](https://ipk-bit.github.io/edal-pgp-knowledgebase/)|
