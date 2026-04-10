@@ -1,4 +1,4 @@
-# Publishing Research Data via the e!DAL-PGP Repository
+# Publishing Research Data via the e!DAL-Plant Genomics and Phenomics (PGP) Repository
 
 ````{panels_fairplus}
 :identifier_text: <>
@@ -8,18 +8,18 @@
 :reading_time_minutes: 20
 :intended_audience:  data_manager, data_producer, principal_investigator
 :has_executable_code: nope
-:maturity_level: 0
-:maturity_indicator: 0
+:maturity_level: 3
+:maturity_indicator: 43
 :recipe_name: Publishing Data with the e!DAL-PGP Repository
 ````
 
 ## Main Objective
 
-The Plant Genomics and Phenomics (PGP) repository provides a scalable infrastructure for publishing research data {footcite}`Arend2014`. 
+The [Plant Genomics and Phenomics (PGP)](https://edal-pgp.ipk-gatersleben.de/) repository provides a scalable infrastructure for publishing research data of any kind with an emphasis on plant sciences {footcite}`Arend2014`. The PGP repository hosts many different kinds of research data from genomic data to phenotypic images and mass spectrometry data to supplementary spreadsheets for scientific publications and training material. The repository is an instance of the [e!DAL](https://edal.ipk-gatersleben.de/) infrastructure framework build upon the FAIR principles and the premise of bring the infrastructure to your data {footcite}`Arend2020`.
 Submitting data through the e!DAL web wizard ensures that datasets receive a persistent identifier (DOI) and are enriched with high-quality metadata.
 This recipe guides users through the specific steps of the e!DAL submission wizard, covering legal agreements, metadata provision, creator management, and data upload.
 
-The main objective is to maximize the **Findability** and **Reusability** of the data by:
+Even though submitting data to the PGP repository makes the data set more [FAIR](http://edamontology.org/topic_4012). The main objective is to maximize the **Findability** and **Reusability** of the data by:
 1.  Formalizing data usage early through the Data Deposit & License Agreement (DDLA).
 2.  Providing rich descriptive metadata (Titles, Abstracts).
 3.  Uniquely identifying contributors via ORCIDs and RORs.
@@ -43,17 +43,18 @@ eDAL Submission Process
 
 |Actions.Objectives.Tasks|Input|Output|
 |--- |--- |--- |
-|data deposition|Research Data|DOI|
-|annotation|Metadata|Landing Page|
+|[data deposition](http://edamontology.org/operation_3431)|Research Data*|[DOI](https://w3id.org/evorao/Doi)|
+|[annotation](http://edamontology.org/operation_0226)|Metadata|[Landing Page](http://www.w3.org/ns/dcat#landingPage)|
 
+*Note: Research Data in this context is understood as the information (whether observed, generated or derived) that is collected and analyzed to produce and validate original research findings.
 ## Table of Software and Tools
 
 |Tool Name|
 |--- |
-|e!DAL-PGP Repository|
-|ORCID|
-|ROR (Research Organization Registry)|
-|e!DAL-PGP Knowledge Base|
+|[e!DAL-PGP Repository]((https://edal-pgp.ipk-gatersleben.de/))|
+|[ORCID](https://orcid.org/)|
+|[ROR (Research Organization Registry)](https://ror.org/)|
+|[e!DAL-PGP Knowledge Base](https://ipk-bit.github.io/edal-pgp-knowledgebase/)|
 
 ## Step-by-Step Process
 
@@ -97,7 +98,7 @@ The final configuration step (Step 4 of 4) handles the physical transfer of file
 #### Option A: Local File Upload
 Use this for standard uploads from your workstation.
 1.  Select the **Local file upload** tab.
-2.  Click **"Dateien auswählen" (Select files)** to browse your computer.
+2.  Click **Select files** to browse your computer.
 3.  **Verification**: Check the file table which displays:
     * **Relative Path**: Ensure your directory structure is preserved (e.g. `bridge_isatab_export/s_study.txt`).
     * **File Type & Size**: Verify that the file sizes match your expectations (e.g. `text/plain`, `12584` bytes).
@@ -122,8 +123,8 @@ The use of **ORCIDs** for authors and **ROR IDs** for affiliations (Step 3) ensu
 The verification of **Relative Paths** during upload (Step 4) guarantees that complex data structures remain intelligible for future reusers.
 
 ### What to read next?
-- [Learn to move through maturity levels with ISA metadata model](https://faircookbook.elixir-europe.org/content/recipes/maturity/isa-maturity-progression.html)
-- [Learn to make computational workflows FAIR](https://w3id.org/faircookbook/FCB062)
+- [Learn to publish plant experimental data in generic data repositories](https://w3id.org/faircookbook/FCB083)
+- [Learn to publish plant genomic and genetic variation data to EMBL-EBI databases](https://w3id.org/faircookbook/FCB061)
 
 ## References
 
